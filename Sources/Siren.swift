@@ -239,7 +239,10 @@ private extension Siren {
                       forCurrentAppStoreVersion currentAppStoreVersion: String,
                       model: Model,
                       andUpdateType updateType: RulesManager.UpdateType) {
-        presentationManager.presentAlert(withRules: rules, forCurrentAppStoreVersion: currentAppStoreVersion) { [weak self] alertAction, currentAppStoreVersion in
+        presentationManager.presentAlert(
+        withRules: rules,
+        forCurrentAppStoreVersion: currentAppStoreVersion,
+        model:  model) { [weak self] alertAction, currentAppStoreVersion in
             guard let self = self else { return }
             self.processAlertAction(alertAction: alertAction, currentAppStoreVersion: currentAppStoreVersion)
 

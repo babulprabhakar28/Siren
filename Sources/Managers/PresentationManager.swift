@@ -87,25 +87,31 @@ extension PresentationManager {
     ///   - rules: The rules that are used to define the type of alert that should be presented.
     ///   - currentAppStoreVersion: The current version of the app in the App Store.
     ///   - handler: The completion handler that returns the an `AlertAction` depending on the type of action the end-user took.
-    func presentAlert(withRules rules: Rules,
-                      forCurrentAppStoreVersion currentAppStoreVersion: String,
-                      completion handler: CompletionHandler?) {
+    func presentAlert(
+        withRules rules: Rules,
+        forCurrentAppStoreVersion currentAppStoreVersion: String,
+        model: Model,
+        completion handler: CompletionHandler?) {
         UserDefaults.alertPresentationDate = Date()
 
         // Alert Title
-        let alertTitle: String
+        var alertTitle: String
         if self.alertTitle == AlertConstants.alertTitle {
             alertTitle = localization.alertTitle()
         } else {
             alertTitle = self.alertTitle
         }
-
+        alertTitle += "(\(currentAppStoreVersion))"
         // Alert Message
-        let alertMessage: String
+        var alertMessage: String
         if self.alertMessage == AlertConstants.alertMessage {
             alertMessage = localization.alertMessage(forCurrentAppStoreVersion: currentAppStoreVersion)
         } else {
             alertMessage = self.alertMessage
+        }
+        
+        if let releaseNotes = model.releaseNotes {
+            alertMessage = releaseNotes
         }
 
         alertController = UIAlertController(title: alertTitle,

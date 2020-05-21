@@ -14,7 +14,7 @@ public struct AlertConstants {
     public static let alertMessage = "A new version of %@ is available. Please update to version %@ now."
 
     /// The alert title which defaults to *Update Available*.
-    public static let alertTitle = "Update Available"
+    public static let alertTitle = "New Version available"
 
     /// The button text that conveys the message that the user should be prompted to update next time the app launches.
     public static let nextTimeButtonTitle = "Next time"
